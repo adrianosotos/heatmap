@@ -1,16 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css';
 
 function Form() {
     const data = {
         zipcode: null,
         locationNumber: null,
-        longitude: null,
-        latitude: null,
+        longitude: undefined,
+        latitude: undefined,
         residents: null
     }
     const [ userData, setUserData ] = useState(data)
     const [ errors, setErrors ] = useState(data)
+    const [ zipcodeMask, setZipCodeMask ] = useState('')
+
+    useEffect(() => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function getPosition (position) {
+                setUserData({
+                    ...userData,
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude
+                })
+            });    
+        } 
+    })
 
     function checkPattern (name, value) {
         const dataPattern = {
@@ -60,19 +73,50 @@ function Form() {
         validateInput(name, value)
     }
 
+    function applyZipcodeMask (e) {
+        e.currentTarget.maxLength = 9
+        let value = e.currentTarget.value
+        value = value.replace(/\D/g, "");
+        value = value.replace(/^(\d{5})(\d)/, "$1-$2");
+        setZipCodeMask(value)
+    }
+
     function handleChange (e) {
         const { name, value } = e.target
+
+        if (name === 'zipcode') {
+            applyZipcodeMask(e)
+        }
+
         setUserData({
             ...userData,
             [name]: value
         })
     }
 
+    function hasEmpty (data) {
+        return Object.values(data).some(value => value === null)
+    }
+
+    function getEmpty (userData) {
+        return Object.keys(userData).reduce((obj, data) => {
+            if (!userData[data]) {
+                obj[data] = `Preenchimento obrigatorio`
+            }
+            return obj
+        }, {}) 
+    }
+
     function hasErrors () {
-        return Object.values(errors).some(value => value !== null)
+        return hasEmpty(userData) || !hasEmpty(errors)
     }
 
     function sendUserData() {
+        setErrors({
+            ...errors,
+            ...getEmpty(userData)
+        })
+        
         if (hasErrors()) {
             return alert(`Corrija os campos destacados`)
         } 
@@ -85,7 +129,8 @@ function Form() {
                 onChange={(e) => handleChange(e)}
                 onBlur={e => handleBlur(e)}
                 name='zipcode'
-                type={'text'} 
+                type={'text'}
+                value={zipcodeMask || ''}
             />
             {errors.zipcode}
 
@@ -103,7 +148,8 @@ function Form() {
                 onChange={(e) => handleChange(e)}
                 onBlur={e => handleBlur(e)}
                 name='latitude'
-                type={'text'} 
+                type={'text'}
+                value={userData.latitude || ''} 
             />
             {errors.latitude}
 
@@ -112,7 +158,8 @@ function Form() {
                 onChange={(e) => handleChange(e)}
                 onBlur={e => handleBlur(e)}
                 name='longitude'
-                type={'text'} 
+                type={'text'}
+                value={userData.longitude || ''}
             />
             {errors.longitude}
             <label>Quantidade de residentes</label>
