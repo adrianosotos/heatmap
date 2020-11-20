@@ -95,7 +95,7 @@ function Form() {
     }
 
     function hasEmpty (data) {
-        return Object.values(data).some(value => value === null)
+        return Object.values(data).some(value => !value)
     }
 
     function getEmpty (userData) {
