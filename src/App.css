@@ -43,3 +43,17 @@
 	max-width: 50%;
 	margin: auto;
 }
+
+.feedback {
+	display: none;
+}
+
+.success {
+	color: green;
+	display: block !important;
+}
+
+.fail {
+	color: red;
+	display: block !important;
+}

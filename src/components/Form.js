@@ -1,20 +1,26 @@
-import { useState, useEffect } from 'react';
-import '../App.css';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import '../App.css'
 
 function Form() {
     const data = {
-        zipcode: null,
-        locationNumber: null,
-        longitude: undefined,
-        latitude: undefined,
-        residents: null
+        zipcode: '',
+        locationNumber: '',
+        longitude: '',
+        latitude: '',
+        residents: ''
     }
     const [ userData, setUserData ] = useState(data)
     const [ errors, setErrors ] = useState(data)
     const [ zipcodeMask, setZipCodeMask ] = useState('')
+    const [ requestStatus, setRequestStatus ] = useState(null)
 
     useEffect(() => {
-        if ("geolocation" in navigator) {
+        getGeoLocation()
+    })
+
+    function getGeoLocation () {
+        if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(function getPosition (position) {
                 setUserData({
                     ...userData,
@@ -23,7 +29,7 @@ function Form() {
                 })
             });    
         } 
-    })
+    }
 
     function checkPattern (name, value) {
         const dataPattern = {
@@ -68,17 +74,17 @@ function Form() {
         return setErrors({...errors, [name]: null})
     }
 
-    function handleBlur (e) {
-        const { name, value } = e.target
-        validateInput(name, value)
-    }
-
     function applyZipcodeMask (e) {
         e.currentTarget.maxLength = 9
         let value = e.currentTarget.value
         value = value.replace(/\D/g, "");
         value = value.replace(/^(\d{5})(\d)/, "$1-$2");
         setZipCodeMask(value)
+    }
+
+    function handleBlur (e) {
+        const { name, value } = e.target
+        validateInput(name, value)
     }
 
     function handleChange (e) {
@@ -94,8 +100,12 @@ function Form() {
         })
     }
 
-    function hasEmpty (data) {
-        return Object.values(data).some(value => !value)
+    function hasEmptyUserData () {
+        return Object.values(userData).some(data => !data)
+    }
+
+    function hasErrors () {
+        return Object.values(errors).some(error => error)
     }
 
     function getEmpty (userData) {
@@ -107,30 +117,56 @@ function Form() {
         }, {}) 
     }
 
-    function hasErrors () {
-        return hasEmpty(userData) || !hasEmpty(errors)
-    }
-
-    function sendUserData() {
+    function getEmptyFields () {
         setErrors({
             ...errors,
             ...getEmpty(userData)
         })
-        
-        if (hasErrors()) {
+    }
+
+    function resetInputs () {
+        setUserData({...userData, ...data})
+        setZipCodeMask('')
+    }
+
+    function handleFeedback (status) {
+        setRequestStatus(status)
+        setTimeout(() => {
+            setRequestStatus(null)
+        }, 2000)
+    }
+
+    function sendUserData () {
+        getEmptyFields()
+
+        if (hasEmptyUserData() || hasErrors()) {
             return alert(`Corrija os campos destacados`)
-        } 
-        console.log(userData)
+        }
+
+        axios.post('http://localhost:5000/address', {
+            ...userData
+          })
+          .then(function (response) {
+            resetInputs()
+            handleFeedback('success')
+          })
+          .catch(function (error) {
+            handleFeedback('fail')
+            console.log(error);
+        });
     }
     return (
         <div className={'user-form'}>
+            <div className={`feedback ${requestStatus}`}>
+                {requestStatus === 'success' ? 'Enviado' : 'Falha no envio'}
+            </div>
             <label>CEP</label>
             <input 
                 onChange={(e) => handleChange(e)}
                 onBlur={e => handleBlur(e)}
                 name='zipcode'
                 type={'text'}
-                value={zipcodeMask || ''}
+                value={zipcodeMask}
             />
             {errors.zipcode}
 
@@ -140,6 +176,7 @@ function Form() {
                 onBlur={e => handleBlur(e)}
                 name='locationNumber'
                 type={'text'} 
+                value={userData.locationNumber}
             />
             {errors.locationNumber}
 
@@ -149,7 +186,7 @@ function Form() {
                 onBlur={e => handleBlur(e)}
                 name='latitude'
                 type={'text'}
-                value={userData.latitude || ''} 
+                value={userData.latitude} 
             />
             {errors.latitude}
 
@@ -159,7 +196,7 @@ function Form() {
                 onBlur={e => handleBlur(e)}
                 name='longitude'
                 type={'text'}
-                value={userData.longitude || ''}
+                value={userData.longitude}
             />
             {errors.longitude}
             <label>Quantidade de residentes</label>
@@ -167,7 +204,8 @@ function Form() {
                 onChange={(e) => handleChange(e)}
                 onBlur={e => handleBlur(e)}
                 name='residents'
-                type={'text'} 
+                type={'text'}
+                value={userData.residents}
             />
             {errors.residents}
             <button onClick={() => sendUserData()}>Enviar</button>
