@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../App.css'
 
-function Form() {
+function Form({ setRequestStatus }) {
     const data = {
         zipcode: '',
         locationNumber: '',
@@ -13,7 +13,6 @@ function Form() {
     const [ userData, setUserData ] = useState(data)
     const [ errors, setErrors ] = useState(data)
     const [ zipcodeMask, setZipCodeMask ] = useState('')
-    const [ requestStatus, setRequestStatus ] = useState(null)
 
     useEffect(() => {
         getGeoLocation()
@@ -157,9 +156,6 @@ function Form() {
     }
     return (
         <div className={'user-form'}>
-            <div className={`feedback ${requestStatus}`}>
-                {requestStatus === 'success' ? 'Enviado' : 'Falha no envio'}
-            </div>
             <label>CEP</label>
             <input 
                 onChange={(e) => handleChange(e)}
