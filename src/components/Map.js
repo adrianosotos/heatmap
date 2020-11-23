@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Map, HeatMap, GoogleApiWrapper } from 'google-maps-react'
+import { isMobile } from '../utils/isMobile'
+
+const containerStyle = {  
+    width: isMobile() ?  '100%' : '70%',
+    height: isMobile() ?  '100%' : '70%',
+    marginBottom: '150px',
+    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
+  }
 
 function MapWrapper ({ google, positions }) {
     const [initalCenter, setInitialCenter] = useState({ lat: -27.7008117, lng: -48.5012206 })
@@ -7,8 +15,9 @@ function MapWrapper ({ google, positions }) {
         setInitialCenter({ lat: -27.7008117, lng: -48.5012206 })
     }, [positions])
     return (
-        <div>
+        <div className='heatmap'>
             <Map
+                containerStyle={containerStyle}
                 google={google}
                 initialCenter={initalCenter}
             >
