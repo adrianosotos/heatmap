@@ -1,17 +1,16 @@
-.App {}
-
 .user-form {
 	display: flex;
 	flex-direction: column;
 	max-width: 50%;
-	margin: 60px auto;
+	margin: 40px auto;
 }
 
 .user-form .input-wrapper {
 	display: flex;
 	flex-direction: column;
 	width: 450px;
-    margin: auto;
+	margin: auto;
+	max-width: 100%;
 }
 
 .user-form input {
@@ -24,7 +23,8 @@
 .user-form .input-error {
 	color: red;
     font-size: 13px;
-    margin-bottom: 10px;
+	margin-bottom: 10px;
+	font-weight: 300;
 }
 
 .user-form button {
@@ -35,6 +35,7 @@
     border: 0;
 	margin: 10px auto;
 	width: 450px;
+	max-width: 100%;
 }
 
 .feedback {
@@ -55,3 +56,14 @@
 	background: red;
 	display: block !important;
 }
+
+.heatmap {
+	width: 70%;
+	margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+	.heatmap {
+		width: 100%;
+	}
+  }
