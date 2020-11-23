@@ -26,7 +26,6 @@ function MapWrapper ({ google, positions }) {
                     position={{positions}}
                     positions={positions}
                     radius={20}
-                    
                 />
             </Map>
         </div>
@@ -35,5 +34,5 @@ function MapWrapper ({ google, positions }) {
 
 export default GoogleApiWrapper({
     apiKey: process.env.REACT_APP_GOOGLE_APIKEY,
-    libraries: ["visualization"]
+    libraries: ['visualization']
 })(MapWrapper);

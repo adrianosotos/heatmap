@@ -59,8 +59,8 @@ function Form({ setRequestStatus }) {
     function applyZipcodeMask (e) {
         e.currentTarget.maxLength = 9
         let value = e.currentTarget.value
-        value = value.replace(/\D/g, "");
-        return value.replace(/^(\d{5})(\d)/, "$1-$2");
+        value = value.replace(/\D/g, '');
+        return value.replace(/^(\d{5})(\d)/, '$1-$2');
     }
 
     function handleFeedback (status) {

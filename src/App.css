@@ -1,46 +1,46 @@
 .user-form {
-	display: flex;
-	flex-direction: column;
-	max-width: 50%;
-	margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    margin: 40px auto;
 }
 
 .user-form .input-wrapper {
-	display: flex;
-	flex-direction: column;
-	width: 450px;
-	margin: auto;
-	max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    margin: auto;
+    max-width: 100%;
 }
 
 .user-form input {
-	margin: 10px 0 0 0;
-	height: 30px;
+    margin: 10px 0 0 0;
+    height: 30px;
     padding: 0 10px;
     font-size: 15px;
 }
 
 .user-form .input-error {
-	color: red;
+    color: red;
     font-size: 13px;
-	margin-bottom: 10px;
-	font-weight: 300;
+    margin-bottom: 10px;
+    font-weight: 300;
 }
 
 .user-form button {
-	height: 35px;
+    height: 35px;
     background: rgb(37,40, 66);
     color: #ffffff;
     font-weight: 900;
     border: 0;
-	margin: 10px auto;
-	width: 450px;
-	max-width: 100%;
+    margin: 10px auto;
+    width: 450px;
+    max-width: 100%;
 }
 
 .feedback {
-	display: block;
-	text-align: center;
+    display: block;
+    text-align: center;
     width: 150px;
     height: 30px;
     color: white;
@@ -48,22 +48,22 @@
 }
 
 .success {
-	background: green;
-	display: block !important;
+    background: green;
+    display: block !important;
 }
 
 .fail {
-	background: red;
-	display: block !important;
+    background: red;
+    display: block !important;
 }
 
 .heatmap {
-	width: 70%;
-	margin: auto;
+    width: 70%;
+    margin: auto;
 }
 
 @media only screen and (max-width: 600px) {
-	.heatmap {
-		width: 100%;
-	}
+    .heatmap {
+        width: 100%;
+    }
   }

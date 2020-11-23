@@ -7,8 +7,8 @@ import MapWrapper from './components/Map'
 import './App.css';
 
 function App() {
-	const [requestStatus, setRequestStatus] = useState(null)
-	const [positions, setPosition] = useState([])
+    const [requestStatus, setRequestStatus] = useState(null)
+    const [positions, setPosition] = useState([])
     
     useEffect(() => {
         fetchLocations()
@@ -29,15 +29,15 @@ function App() {
             weight: Number(residents)
         }))
     }
-	return (
-		<div className="App">
-			<div className={`feedback ${requestStatus}`}>
-				{requestStatus === 'success' ? 'Enviado' : 'Falha no envio'}
-			</div>
-			<Form requestStatus  setRequestStatus={setRequestStatus} />
-			<MapWrapper positions={positions}/>
-		</div>
-	);
+    return (
+        <div className="App">
+            <div className={`feedback ${requestStatus}`}>
+                {requestStatus === 'success' ? 'Enviado' : 'Falha no envio'}
+            </div>
+            <Form requestStatus  setRequestStatus={setRequestStatus} />
+            <MapWrapper positions={positions}/>
+        </div>
+    );
 }
 
 export default App;
