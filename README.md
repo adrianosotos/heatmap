@@ -9,7 +9,7 @@ This project is made with React, GoogleMaps API and JSON-server to simulate back
 
 ## How to run
 
-Create and `.env` file on root directory following `.env.example` pattern. Past your google maps apiKey. Then:
+Create and `.env` file on root directory following `.env.example` pattern. Paste your google maps apiKey. Then:
 
 ```bash
 # Initial setup
