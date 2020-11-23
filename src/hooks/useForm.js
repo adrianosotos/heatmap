@@ -51,13 +51,13 @@ function useForm (dataStruct, validation, mask, submitUrl, feedback) {
     }
 
     function resetInputs () {
-        setValues({})
-        setErrors({})
+        setValues(dataStruct)
+        setErrors(dataStruct)
     }
 
     function handleSubmit () {
         getEmptyFields()
-
+        debugger
         if (hasEmptyData() || hasErrors()) {
             return alert(`Corrija os campos destacados`)
         }
