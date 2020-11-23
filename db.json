@@ -1,59 +1,12 @@
 {
   "address": [
     {
-      "zipcode": "43242-342",
-      "locationNumber": "123",
-      "longitude": -48.5012206,
-      "latitude": -27.7008117,
-      "residents": "12",
-      "id": 1
-    },
-    {
-      "zipcode": "12312-312",
-      "locationNumber": "12",
-      "longitude": -48.5012206,
-      "latitude": -27.7008117,
-      "residents": "3",
-      "id": 2
-    },
-    {
-      "zipcode": "21331-231",
-      "locationNumber": "123",
-      "longitude": "-48.5111163",
-      "latitude": -27.7008117,
-      "residents": "123",
-      "id": 3
-    },
-    {
-      "residents": "1",
       "zipcode": "88065-362",
-      "locationNumber": "112",
-      "latitude": "20",
-      "longitude": "-20",
-      "id": 4
-    },
-    {
-      "zipcode": "21390-129",
       "locationNumber": "1",
-      "latitude": "-27.7008117",
-      "longitude": "-48.5012206",
-      "residents": "2",
-      "id": 5
-    },
-    {
-      "zipcode": "31213-121",
-      "locationNumber": "1",
-      "latitude": "-27.7008117",
-      "longitude": "-48.5012206",
-      "residents": "2",
-      "id": 6
-    },
-    {
-      "zipcode": "43242-342",
-      "latitude": "-27.7008117",
-      "longitude": "-48.5012206",
-      "residents": "1000",
-      "id": 7
+      "longitude": -48.5082094,
+      "latitude": -27.694422,
+      "residents": "10",
+      "id": 1
     }
   ]
 }
