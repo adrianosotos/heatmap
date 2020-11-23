@@ -1,7 +1,7 @@
 import useForm from '../hooks/useForm'
 import validate from '../utils/validate'
 import Input from './Input'
-import '../App.css'
+import '../styles/App.css'
 import Axios from 'axios'
 
 function Form({ setRequestStatus }) {

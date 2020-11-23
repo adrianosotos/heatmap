@@ -4,7 +4,7 @@ import axios from 'axios'
 import Form from './components/Form'
 import MapWrapper from './components/Map'
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
     const [requestStatus, setRequestStatus] = useState(null)
