@@ -1,5 +1,6 @@
 import useForm from '../hooks/useForm'
 import validate from '../utils/validate'
+import Input from './Input'
 import '../App.css'
 import Axios from 'axios'
 
@@ -70,55 +71,53 @@ function Form({ setRequestStatus }) {
     }
 
     return (
-        <div className={'user-form'}>
-            <label>CEP</label>
-            <input 
-                onChange={(e) => handleChange(e)}
-                onBlur={e => interceptHandleBlue(e)}
-                name='zipcode'
+        <div className='user-form'>
+            <Input 
+                label={'CEP'} 
+                onChange={handleChange}
+                onBlur={interceptHandleBlue} 
+                name={'zipcode'}
                 type={'text'}
                 value={values.zipcode || ''}
+                error={errors.zipcode}
             />
-            {errors.zipcode}
-
-            <label>Número</label>
-            <input 
-                onChange={(e) => handleChange(e)}
-                onBlur={e => handleBlur(e)}
-                name='locationNumber'
-                type={'text'} 
-                value={values.locationNumber || ''}
-            />
-            {errors.locationNumber}
-
-            <label>Latitude</label>
-            <input 
-                onChange={(e) => handleChange(e)}
-                onBlur={e => handleBlur(e)}
-                name='latitude'
+            <Input 
+                label={'Número'} 
+                onChange={handleChange}
+                onBlur={handleBlur} 
+                name={'locationNumber'}
                 type={'text'}
-                value={values.latitude || ''} 
+                value={values.locationNumber || ''}
+                error={errors.locationNumber}
             />
-            {errors.latitude}
-
-            <label>Logitude</label>
-            <input 
-                onChange={(e) => handleChange(e)}
-                onBlur={e => handleBlur(e)}
-                name='longitude'
+            <Input 
+                label={'Latitude'} 
+                onChange={handleChange}
+                onBlur={handleBlur} 
+                name={'latitude'}
+                type={'text'}
+                value={values.latitude || ''}
+                error={errors.latitude}
+            />
+            <Input 
+                label={'Longitude'} 
+                onChange={handleChange}
+                onBlur={handleBlur} 
+                name={'longitude'}
                 type={'text'}
                 value={values.longitude || ''}
+                error={errors.longitude}
             />
-            {errors.longitude}
-            <label>Quantidade de residentes</label>
-            <input 
-                onChange={(e) => handleChange(e)}
-                onBlur={e => handleBlur(e)}
-                name='residents'
+            <Input 
+                label={'Quantidade de residentes'} 
+                onChange={handleChange}
+                onBlur={handleBlur} 
+                name={'residents'}
                 type={'text'}
                 value={values.residents || ''}
+                error={errors.residents}
             />
-            {errors.residents}
+
             <button onClick={() => handleSubmit()}>Enviar</button>
         </div>
     );
