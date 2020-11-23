@@ -25,6 +25,6 @@ function MapWrapper ({ google, positions }) {
 }
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyDWkBbWLBlbtMQ_-MZMG2iJ-k3IbAuTQH8",
+    apiKey: process.env.REACT_APP_GOOGLE_APIKEY,
     libraries: ["visualization"]
 })(MapWrapper);
