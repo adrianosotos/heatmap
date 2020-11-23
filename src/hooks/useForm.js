@@ -79,6 +79,7 @@ function useForm (dataStruct, validation, mask, submitUrl, feedback) {
         handleChange,
         handleSubmit,
         handleBlur,
+        setValues,
         values,
         errors
       }
